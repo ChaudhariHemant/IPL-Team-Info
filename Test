@@ -1,0 +1,109 @@
+package com.playet;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// Create a list of players for MI
+		List<Player> MI = new ArrayList<>();
+		MI.add(new Player("ROHIT", 45000, 10, 32));
+		MI.add(new Player("SURYA", 100, 3, 6));
+		MI.add(new Player("PANDYA", 31000, 27, 23));
+		MI.add(new Player("POLLARD", 34000, 34, 12));
+		MI.add(new Player("DEWALD BREVIS", 40000, 28, 12));
+
+		// Create a list of players for CSK
+		List<Player> CSK = new ArrayList<>();
+		CSK.add(new Player("DHONI", 25000, 10, 28));
+		CSK.add(new Player("JADEJA", 31000, 47, 6));
+		CSK.add(new Player("SHIVAM DUBE", 23000, 58, 23));
+		CSK.add(new Player("SHARDUL", 27000, 34, 12));
+		CSK.add(new Player("RACHIN", 40000, 28, 12));
+
+		List<Player> PBKS = new ArrayList<>();
+		PBKS.add(new Player("SHIKHAR DHAWAN", 44000, 12, 30));
+		PBKS.add(new Player("MAYANK AGARWAL", 30000, 6, 15));
+		PBKS.add(new Player("KAGISO RABADA", 12000, 50, 28));
+		PBKS.add(new Player("ARSHDEEP SINGH", 15000, 45, 20));
+		PBKS.add(new Player("LIAM LIVINGSTONE", 32000, 24, 22));
+
+		Function f = new Function();
+
+		System.out.println("=== MI TEAM ===");
+		f.TeamInfo("MI", MI);
+		TeamPerformance(MI, f);
+
+		// Display CSK team stats
+		System.out.println("=== CSK TEAM ===");
+		f.TeamInfo("CSK", CSK);
+		TeamPerformance(CSK, f);
+
+		
+
+		// Display PBKS team stats
+		System.out.println("=== PBKS TEAM ===");
+		f.TeamInfo("PBKS", PBKS);
+		TeamPerformance(PBKS, f);
+	}
+
+	// Method to display team performance using the Function class
+	public static void TeamPerformance(List<Player> team, Function f) {
+		Player highestRunPlayer = f.highRunPlayer(team);
+		if (highestRunPlayer != null) {
+			System.out.println("Player with the highest runs: " + highestRunPlayer.getName());
+		} else {
+			System.out.println("Player with the highest runs: No player");
+		}
+
+		// Call the HitMan method and store the result
+		Player hitmanPlayer = f.HitMan(team); // Pass the team to the HitMan method
+		if (hitmanPlayer != null) {
+			System.out.println(
+					"HitMan: " + hitmanPlayer.getName() + " with " + hitmanPlayer.getCentury() + " centuries.");
+		} else {
+			System.out.println("No HitMan found in the team.");
+		}
+
+		String Batman = f.Batter(team);
+		String GoodBoller = f.Boller(team);
+		String allRounders = f.allRound(team);
+
+		// Display the players with more than 30,000 runs in table format
+		System.out.println("\nPlayers with more than 30,000 runs:");
+		if (Batman != null) {
+			displayTable("Players", Batman);
+		} else {
+			System.out.println("None");
+		}
+
+		// Display the players with more than 20 wickets in table format
+		System.out.println("\nPlayers with more than 20 wickets:");
+		if (GoodBoller != null) {
+			displayTable("Players", GoodBoller);
+		} else {
+			System.out.println("None");
+		}
+
+		// Display all-rounders in the team
+		System.out.println("\nAll-rounders in the team:");
+		if (allRounders != null) {
+			displayTable("All-rounders", allRounders);
+		} else {
+			System.out.println("No all-rounders found with wickets > 20 and runs > 30,000.");
+		}
+	}
+
+	// Method to display data in table format
+	public static void displayTable(String columnHeader, String players) {
+		String[] playerNames = players.split(", ");
+		System.out.println("+--------------------------+");
+		System.out.printf("| %-24s |\n", columnHeader);
+		System.out.println("+--------------------------+");
+		for (String name : playerNames) {
+			System.out.printf("| %-24s |\n", name);
+		}
+		System.out.println("+--------------------------+");
+	}
+}

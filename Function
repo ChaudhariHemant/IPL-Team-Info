@@ -1,0 +1,95 @@
+package com.playet;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Function {
+	public void TeamInfo(String teamName, List<Player> team) {
+		System.out.println("=== " + teamName + " TEAM INFO ===");
+		System.out.printf("%-15s %-10s %-10s %-10s\n", "Player Name", "Runs", "Wickets", "Centuries");
+		System.out.println("--------------------------------------------------");
+
+		for (Player player : team) {
+			System.out.printf("%-15s %-10d %-10d %-10d\n", player.getName(), player.getRun(), player.getWicket(),
+					player.getCentury());
+		}
+
+		System.out.println("--------------------------------------------------");
+	}
+	public Player HitMan(List<Player> team) {
+	    for (Player player : team) {
+	        if (player.getCentury() > 30) {
+	            return player; // Return the player who is the HitMan
+	        }
+	    }
+	    return null; // No player found with more than 30 centuries
+	}
+
+	// Method to find the player with the highest runs
+	public Player highRunPlayer(List<Player> team) {
+		if (team.isEmpty()) {
+			return null;
+		}
+		Player highestRunPlayer = team.get(0);
+		for (Player p : team) {
+			if (p.getRun() > highestRunPlayer.getRun()) {
+				highestRunPlayer = p;
+			}
+		}
+		return highestRunPlayer;
+	}
+
+	// Method to get players with runs greater than 30,000
+	public String Batter(List<Player> team) {
+		StringBuilder playersWithHighRuns = new StringBuilder();
+		for (Player p : team) {
+			if (p.getRun() > 30000) {
+				playersWithHighRuns.append(p.getName().toUpperCase()).append(", ");
+			}
+		}
+		// If no players met the condition, return null
+		if (playersWithHighRuns.length() == 0) {
+			return null;
+		}
+		// Remove the last comma and space, and return the result
+		return playersWithHighRuns.substring(0, playersWithHighRuns.length() - 2) + ".";
+	}
+
+	// Method to get players with wickets greater than 20
+	public String Boller(List<Player> team) {
+		StringBuilder playersWithHighWickets = new StringBuilder();
+		for (Player p : team) {
+			if (p.getWicket() > 20) {
+				playersWithHighWickets.append(p.getName().toUpperCase()).append(", ");
+			}
+		}
+		// If no players met the condition, return null
+		if (playersWithHighWickets.length() == 0) {
+			return null;
+		}
+		// Remove the last comma and space, and return the result
+		return playersWithHighWickets.substring(0, playersWithHighWickets.length() - 2) + ".";
+	}
+
+	// Method to get all-rounders (players with runs > 30,000 and wickets > 20)
+	public String allRound(List<Player> team) {
+		List<String> allroundPlayers = new ArrayList<>();
+
+		// Loop through the list of players and check the condition
+		for (Player p : team) {
+			if (p.getWicket() > 20 && p.getRun() > 30000) {
+				allroundPlayers.add(p.getName().toUpperCase());
+			}
+		}
+
+		// If no players met the condition, return null
+		if (allroundPlayers.isEmpty()) {
+			return null;
+		}
+
+		// Join the names in the list with commas and add a period at the end
+		return String.join(", ", allroundPlayers) + ".";
+	}
+
+	
+}

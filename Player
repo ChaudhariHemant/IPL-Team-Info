@@ -1,0 +1,57 @@
+package com.playet;
+
+public class Player {
+    private String name;
+    private int run;
+    private int wicket;
+    private int century;  // Corrected spelling
+
+    public Player() {
+        super();
+    }
+
+    public Player(String name, int run, int wicket, int century) {  // Corrected spelling
+        super();
+        this.name = name;
+        this.run = run;
+        this.wicket = wicket;
+        this.century = century;  // Corrected spelling
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getRun() {
+        return run;
+    }
+
+    public void setRun(int run) {
+        this.run = run;
+    }
+
+    public int getWicket() {
+        return wicket;
+    }
+
+    public void setWicket(int wicket) {
+        this.wicket = wicket;
+    }
+
+    public int getCentury() {  // Corrected spelling
+        return century;
+    }
+
+    public void setCentury(int century) {  // Corrected spelling
+        this.century = century;
+    }
+
+    @Override
+    public String toString() {
+        return "Player [name=" + name + ", run=" + run + ", wickets=" + wicket + ", centuries=" + century + "]";  // Improved output format
+    }
+}
